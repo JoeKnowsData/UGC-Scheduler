@@ -1,0 +1,15 @@
+node_modules/
+
+# Secrets: never commit real keys
+.env
+.env.*
+!.env.example
+
+# Database (holds login tokens) and uploaded videos
+data/
+data-backup/
+*.db
+*.db-shm
+*.db-wal
+*.mp4
+*.mov

@@ -1,0 +1,82 @@
+:root {
+  --bg: #f5f6f8; --panel: #fff; --text: #1b1d22; --muted: #6b7280; --line: #e3e5ea;
+  --accent: #2563eb; --accent-text: #fff; --ok: #15803d; --warn: #b45309; --bad: #b91c1c;
+  --instagram: #d62976; --facebook: #1877f2; --youtube: #ff0000; --tiktok: #111;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111318; --panel: #1a1d23; --text: #e8eaef; --muted: #9aa1ad; --line: #2b2f37;
+    --accent: #3b82f6; --ok: #4ade80; --warn: #fbbf24; --bad: #f87171; --tiktok: #eee;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.45 system-ui, -apple-system, Segoe UI, sans-serif; background: var(--bg); color: var(--text); }
+header { display: flex; align-items: center; gap: 24px; padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 2; }
+.brand { font-size: 17px; }
+nav { display: flex; gap: 4px; }
+nav button { background: none; border: 0; padding: 8px 12px; border-radius: 8px; color: var(--muted); font: inherit; cursor: pointer; }
+nav button.active { background: var(--bg); color: var(--text); font-weight: 600; }
+main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 60px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 18px 0 8px; }
+h2:first-child { margin-top: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+.compose { display: grid; grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+@media (max-width: 760px) { .compose { grid-template-columns: 1fr; } header { flex-wrap: wrap; gap: 8px; } }
+.row-between { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+textarea, input[type=datetime-local], .token input, .token select { width: 100%; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+textarea { resize: vertical; }
+.hint { color: var(--muted); font-size: 13px; margin-top: 4px; }
+button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 9px 16px; }
+button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+button.link { border: 0; background: none; color: var(--accent); padding: 0; }
+button:disabled { opacity: .5; cursor: default; }
+.actions { display: flex; gap: 10px; margin-top: 18px; }
+.drop { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 2px dashed var(--line); border-radius: 10px; padding: 22px; cursor: pointer; text-align: center; color: var(--muted); }
+.drop.over { border-color: var(--accent); }
+.drop input { display: none; }
+.drop video { max-height: 260px; border-radius: 8px; }
+.acct { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 6px; cursor: pointer; }
+.acct:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.acct img, .avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--line); flex: none; }
+.acct .who { min-width: 0; flex: 1; }
+.acct .who div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.acct .who small { color: var(--muted); }
+.pf { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; color: #fff; }
+.pf.instagram { background: var(--instagram); } .pf.facebook { background: var(--facebook); }
+.pf.youtube { background: var(--youtube); } .pf.tiktok { background: var(--tiktok); color: var(--panel); }
+.connect { display: flex; flex-wrap: wrap; gap: 10px; }
+.connect a { text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #fff; font-weight: 600; }
+.connect a.off { opacity: .4; pointer-events: none; }
+.connect .instagram { background: var(--instagram); } .connect .facebook { background: var(--facebook); }
+.connect .youtube { background: var(--youtube); } .connect .tiktok { background: var(--tiktok); color: var(--panel); }
+.post { display: flex; gap: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+.post video { width: 90px; height: 160px; object-fit: cover; border-radius: 8px; background: #000; flex: none; }
+.post .body { flex: 1; min-width: 0; }
+.post .when { font-weight: 600; }
+.post .caption { white-space: pre-wrap; margin: 6px 0 10px; max-height: 6.5em; overflow: hidden; }
+.targets { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.targets .err { color: var(--bad); font-size: 13px; display: block; margin-left: 4px; }
+.badge { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--bg); }
+.s-published { color: var(--ok); } .s-failed { color: var(--bad); } .s-partial { color: var(--warn); } .s-publishing { color: var(--accent); }
+.post-actions { display: flex; gap: 8px; margin-top: 10px; }
+.post-actions button { padding: 5px 12px; font-size: 13px; }
+.day { margin: 22px 0 8px; color: var(--muted); font-weight: 600; }
+#flash { max-width: 1040px; margin: 14px auto 0; padding: 10px 14px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); }
+#flash.bad { border-color: var(--bad); color: var(--bad); } #flash.ok { border-color: var(--ok); color: var(--ok); }
+.progress { height: 6px; background: var(--line); border-radius: 3px; margin-top: 14px; overflow: hidden; }
+.progress div { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.empty { color: var(--muted); text-align: center; padding: 30px; }
+fieldset.tiktok { border: 1px solid var(--line); border-radius: 10px; padding: 4px 14px 10px; margin: 18px 0 0; min-width: 0; }
+fieldset.tiktok h2 { margin-top: 12px; }
+fieldset.tiktok .field { display: block; margin: 10px 0; font-weight: 600; font-size: 14px; }
+fieldset.tiktok select { display: block; width: 100%; margin-top: 6px; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px; }
+fieldset.tiktok .checks { display: flex; gap: 18px; margin-top: 6px; font-weight: 400; }
+.tiktok label:has(input:disabled) { opacity: .45; }
+.tiktok .switch { display: flex; gap: 8px; align-items: center; margin: 12px 0 4px; font-weight: 600; font-size: 14px; }
+.tiktok .option { display: flex; gap: 8px; align-items: flex-start; margin: 8px 0; }
+.tiktok .option small { display: block; color: var(--muted); }
+.tiktok .warn { color: var(--warn); }
+.tiktok a { color: var(--accent); }
+.token { display: flex; gap: 8px; }
+.token input { flex: 1; min-width: 0; }
+.token select { width: auto; flex: none; }

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UGC Scheduler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <strong class="brand">UGC Scheduler</strong>
+    <nav>
+      <button data-tab="compose" class="active">New post</button>
+      <button data-tab="queue">Queue</button>
+      <button data-tab="accounts">Accounts</button>
+    </nav>
+  </header>
+  <div id="flash" hidden></div>
+
+  <main>
+    <section id="compose" class="tab">
+      <form id="post-form" class="compose">
+        <div class="panel profiles">
+          <div class="row-between">
+            <h2>Post to</h2>
+            <button type="button" class="link" id="select-all">Select all</button>
+          </div>
+          <div id="account-picker"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Caption</h2>
+          <textarea name="caption" rows="7" maxlength="2200" placeholder="Write your caption, #hashtags included. On YouTube the first line becomes the title."></textarea>
+          <div class="hint"><span id="caption-count">0</span> / 2200</div>
+
+          <h2>Video</h2>
+          <label class="drop" id="drop">
+            <input type="file" name="video" accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.m4v,.webm" required>
+            <span id="drop-text">Choose or drop a vertical video (.mp4 or .mov)</span>
+            <video id="preview" muted playsinline hidden></video>
+          </label>
+
+          <fieldset id="tiktok-panel" class="tiktok" hidden>
+            <h2>TikTok</h2>
+            <div id="tt-creator" class="hint"></div>
+            <label class="field">Who can see this video
+              <select name="tt_privacy"><option value="">Select…</option></select>
+            </label>
+            <div class="field">Allow users to
+              <div class="checks">
+                <label><input type="checkbox" name="tt_comment"> Comment</label>
+                <label><input type="checkbox" name="tt_duet"> Duet</label>
+                <label><input type="checkbox" name="tt_stitch"> Stitch</label>
+              </div>
+            </div>
+            <label class="switch"><input type="checkbox" name="tt_disclose"> Disclose video content</label>
+            <div id="tt-disclose" hidden>
+              <p class="hint">Turn on to disclose that this video promotes goods or services in exchange for something of value. Your video could promote yourself, a third party, or both.</p>
+              <label class="option"><input type="checkbox" name="tt_yourbrand"> <span><b>Your brand</b><small>You are promoting yourself or your own business. This video will be classified as Brand Organic.</small></span></label>
+              <label class="option"><input type="checkbox" name="tt_branded"> <span><b>Branded content</b><small>You are promoting another brand or a third party. This video will be classified as Branded Content.</small></span></label>
+              <p class="hint" id="tt-label"></p>
+            </div>
+            <p class="hint" id="tt-consent"></p>
+          </fieldset>
+
+          <h2>When</h2>
+          <input type="datetime-local" name="when">
+          <div class="hint" id="tz"></div>
+
+          <div class="actions">
+            <button type="submit" name="mode" value="schedule" class="primary">Schedule</button>
+            <button type="submit" name="mode" value="now">Post now</button>
+          </div>
+          <div class="progress" id="progress" hidden><div></div></div>
+        </div>
+      </form>
+    </section>
+
+    <section id="queue" class="tab" hidden>
+      <div id="post-list"></div>
+    </section>
+
+    <section id="accounts" class="tab" hidden>
+      <div class="panel">
+        <h2>Connect an account</h2>
+        <div id="connect-buttons" class="connect"></div>
+        <p class="hint">Instagram must be a Business or Creator account. A Facebook login adds every Page you manage.</p>
+        <h2>Or paste a key</h2>
+        <form id="token-form" class="token">
+          <select name="platform">
+            <option value="instagram">Instagram</option>
+            <option value="facebook">Facebook Pages</option>
+          </select>
+          <input name="token" placeholder="Paste the key here" autocomplete="off">
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="panel">
+        <h2>Connected</h2>
+        <div id="account-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <template id="post-tpl">
+    <article class="post">
+      <video muted preload="metadata"></video>
+      <div class="body">
+        <div class="row-between">
+          <span class="when"></span>
+          <span class="badge"></span>
+        </div>
+        <p class="caption"></p>
+        <ul class="targets"></ul>
+        <div class="post-actions"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
